@@ -13,7 +13,7 @@ function second() {
 // first();
 // second();
 
-function learnJS(lang, callback) {
+async function learnJS (lang, callback) {
     setTimeout(() => {
         console.log(`I'm learning ${lang}`);
     }, 1500);
