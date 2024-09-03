@@ -78,7 +78,7 @@ const num = [2, 5, 7];
 log(...num);
 
 const arr = ['a', 'b'];
-const newArr = [...arr];
+const newArr = [...array];
 const q = {
     one: 1,
     two: 2,
