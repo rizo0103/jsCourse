@@ -1,54 +1,23 @@
-let students = {
-    js: [{
-        name: 'John',
-        progress: 100,
-    }, {
-        name: 'Ivan',
-        progress: 60,
-    }],
+"use strict";
 
-    html: {
-        basic: [{
-            name: 'Peter',
-            progress: 20,
-        }, {
-            name: 'Ann',
-            progress: 18,
-        }],
-
-        pro: [{
-            name: 'Sam',
-            progress: 10,
-        }],
-        some: {
-            name: 'Test',
-            progress: 100,
-        },
-    },
-};
-
-function getTotalProgressBuIteration(data) {
-    let total = 0, students = 0;
-
-    for (let course of Object.values(data)) {
-        if (Array.isArray(course)) {
-            students += course.length;
-
-            for (let i = 0; i < course.length; ++i) {
-                total += course[i].progress;
-            }
-        } else {
-            for (let subCourse of Object.values(course)) {
-                students += subCourse.length;
-
-                for (let i = 0; i < subCourse.length; ++i) {
-                    total += subCourse[i].progress;
-                }
-            }
-        }
+// 1;
+function calculateVolumeAndArea(val) {
+    if (typeof(val) === 'number' && Math.round(val) === val && val > 0) {
+        return `Объем куба: ${val * val * val}, площадь всей поверхности: ${6 * val * val}`; 
+    } else {
+        return 'При вычислении произошла ошибка';
     }
-
-    return total / students;
 }
 
-console.log(getTotalProgressBuIteration(students));
+// 2;
+
+function getCoupeNumber(number) {
+    if (number === 0 || number > 36) {
+        return "Таких мест в вагоне не существует";
+    } else if (number < 0 || typeof(number) != 'number' || Math.round(number) != number) {
+        return "Ошибка. Проверьте правильность введенного номера места";
+    } else {
+        return Math.ceil(number / 4);
+    }
+}
+
