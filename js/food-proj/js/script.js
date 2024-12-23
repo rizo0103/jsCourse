@@ -109,18 +109,22 @@ window.addEventListener('DOMContentLoaded', () => {
           btnModalOpen = document.querySelectorAll('[data-modal]'),
           btnModalClose = document.querySelector('[data-close]');
 
+    function openModal() {
+        modal.classList.add('show');
+        modal.classList.remove('hide');
+        document.body.style.overflow = 'hidden';
+
+        clearInterval(modalTimerId);
+    }
+
     for (let btns of btnModalOpen) {
-        btns.addEventListener('click', () => {
-            modal.classList.add('show');
-            modal.classList.remove('hide');
-            // modal.classList.toggle('show');
-            document.body.style.overflow = 'hidden';
-        });
+        btns.addEventListener('click', openModal);
     }
     
     // btnModalOpen.addEventListener('click', () => {
     //     modal.classList.add('show');
     // });
+
 
     function closeModal() {
         modal.classList.remove('show');
@@ -141,4 +145,15 @@ window.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }
     });
+
+    const modalTimerId = setTimeout(openModal, 5000);
+
+    function showModalByScroll() {
+        if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight - 1) {
+            openModal();
+            window.removeEventListener('scroll', showModalByScroll);
+        }
+    }
+
+    window.addEventListener('scroll', showModalByScroll);
 });
