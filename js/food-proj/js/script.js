@@ -146,7 +146,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // const modalTimerId = setTimeout(openModal, 5000);
+    const modalTimerId = setTimeout(openModal, 5000);
 
     function showModalByScroll() {
         if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight - 1) {
@@ -232,5 +232,47 @@ window.addEventListener('DOMContentLoaded', () => {
         '.menu .container',
         'menu__item',
     ).render();
+
+    // Forms;
+
+    const forms = document.querySelectorAll('form');
+
+    const message = {
+        loading: 'Загрузка...',
+        success: 'Спасибо! Мы получили ваши данные.',
+        failure: 'Что-то пошло не так...'
+    };
+
+    forms.forEach(form => {
+        postData(form);
+    });
+
+    function postData(form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const statusMessage = document.createElement('div');
+            statusMessage.classList.add('status');
+            statusMessage.textContent = message.loading;
+            form.append(statusMessage);
+
+            const request = new XMLHttpRequest();
+            request.open('POST', 'server.php');
+
+            request.setRequestHeader('Content-Type', 'multipart/form-data');
+            const formData = new FormData(form);
+
+            request.send(formData);
+
+            request.addEventListener('load', () => {
+                if (request.status === 200) {
+                    console.log(request.response);
+                    statusMessage.textContent = message.success;
+                } else {
+                    statusMessage.textContent = message.failure;
+                }
+            });
+        });
+    }
 
 });
