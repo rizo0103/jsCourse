@@ -49,3 +49,4 @@ const test = time => {
 Promise.race([test(1000), test(2000)]).then(() => {
     console.log('all');
 });
+
