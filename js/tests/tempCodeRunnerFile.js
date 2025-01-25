@@ -1,28 +1,17 @@
 'use strict';
 
-const films = [
-    { name: 'Titanic', rating: 9 },
-    { name: 'Die hard 5', rating: 5 },
-    { name: 'Matrix', rating: 8 },
-    { name: 'Some bad film', rating: 4 }
+const funds = [
+    {amount: -1400},
+    {amount: 2400},
+    {amount: -1000},
+    {amount: 500},
+    {amount: 10400},
+    {amount: -11400}
 ];
 
-const showGoodFilms = (arr) => arr.filter(item => item.rating >= 8);
+const getPositiveIncomeAmount = (arr) => arr.map(item => item.amount > 0 ? item.amount : 0).reduce((sum, current) => sum + current);
 
-console.log(showGoodFilms(films));
+const getTotalIncomeAmount = (arr) => arr.map(item => item.amount).reduce((sum, current) => sum + current);
 
-const showListOfFilms = (arr) => arr.reduce((sum, current, index) => sum + (index == 0 ? '' : ', ') + current.name, '');
-
-console.log(showListOfFilms(films));
-
-const setFilmsIds = (arr) => arr.map((item, index) => Object.assign(item, {id: index}));
-
-setFilmsIds(films);
-
-console.log(films);
-
-const tranformedArray = setFilmsIds(films);
-
-const checkFilms = (arr) => arr.every(item => item.id !== undefined);
-
-console.log(checkFilms(tranformedArray));
+console.log(getPositiveIncomeAmount(funds)); // Output: 13'300
+console.log(getTotalIncomeAmount(funds)); // Output: 13'300
